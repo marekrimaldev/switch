@@ -2,55 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour, IInteractable
 {
-    [SerializeField] private LayerMask _whiteLayer;
-    [SerializeField] private LayerMask blackLayer;
+    [SerializeField] private AudioClip _switchSound;      // sound from joedeshon // other is https://freesound.org/people/Erokia/sounds/411746/
 
-
-    private Color _color;
+    private AudioSource _as;
     private SpriteRenderer _sr;
+    private Color _color;
+
+    [SerializeField] private VoidGameEvent OnColorSwitchRequest;
 
     private void Start()
     {
+        _as = GetComponent<AudioSource>();
         _sr = GetComponentInChildren<SpriteRenderer>();
         _color = _sr.color;
-        if (_color == Color.white)
-        {
-            ChangeLayer(_whiteLayer);
-        }
-        else
-        {
-            ChangeLayer(blackLayer);
-        }
-    }
-
-    private void ChangeLayer(LayerMask layer)
-    {
-        //foreach (Transform t in transform)
-        //{
-        //    t.gameObject.layer = layer;
-        //}
-    }
-
-    public void ChangeColor()
-    {
-        //if (_color == Color.white)
-        //{
-        //    _color = Color.black;
-        //    _sr.color = _color;
-        //    gameObject.layer = _blackMask;
-        //}
-        //else
-        //{
-        //    _color = Color.white;
-        //    _sr.color = _color;
-        //    gameObject.layer = _whiteMask;
-        //}
     }
 
     public Color GetColor()
     {
         return _color;
+    }
+
+    public void Interact(Player player)
+    {
+        if(player.GetComponentInChildren<SpriteRenderer>().color != _color)
+        {
+            _as.PlayOneShot(_switchSound);
+
+            Void v;
+            OnColorSwitchRequest.Raise(v);
+        }
     }
 }

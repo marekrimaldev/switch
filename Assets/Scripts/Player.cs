@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
-    [SerializeField] private LayerMask _whiteCollisionLayer;
-    [SerializeField] private LayerMask _blackCollisionLayer;
-
-    [SerializeField] private VoidGameEvent OnColorChange;
-
     [SerializeField] protected float _jumpForce = 20;
     [SerializeField] protected float _movementSpeed = 20;
 
@@ -50,30 +44,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChangeColor(Color color)
-    {
-        _color = color;
-        _sr.color = _color;
-        //ChangeLayer(_blackCollisionLayer);
-    }
-
-    public void ChangeColor()
+    public void SwitchColor()
     {
         if (_color == Color.white)
         {
-            ChangeColor(Color.black);
+            _color = Color.black;
+            _sr.color = Color.black;
         }
         else
         {
-            ChangeColor(Color.white);
-        }
-    }
-
-    private void ChangeLayer(LayerMask layer)
-    {
-        foreach (Transform t in transform)
-        {
-            //t.gameObject.layer = layer;
+            _color = Color.white;
+            _sr.color = Color.white;
         }
     }
 
@@ -81,16 +62,19 @@ public class Player : MonoBehaviour
     {
         _isGrounded = true;
 
-        Obstacle obstacle = collision.gameObject.GetComponentInParent<Obstacle>();
-        if (obstacle != null)
+        IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
+        if (interactable != null)
         {
-            if(obstacle.GetColor() != _color)
-            {
-                Void v;
-                OnColorChange?.Raise(v);
+            interactable.Interact(this);
+        }
+    }
 
-                ChangeColor();
-            }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
+        if (interactable != null)
+        {
+            interactable.Interact(this);
         }
     }
 }
