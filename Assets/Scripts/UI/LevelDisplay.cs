@@ -32,7 +32,7 @@ public class LevelDisplay : MonoBehaviour, IUISelectable
         _levelInfo = levelInfo;
         _levelNumberText.text = levelInfo.LevelName;
 
-        SetUnhiglighted();
+        SetUnhighlighted();
     }
 
     public void Highlight(bool value)
@@ -40,11 +40,11 @@ public class LevelDisplay : MonoBehaviour, IUISelectable
         if (value)
         {
             _as.PlayOneShot(_highlightSound);
-            SetHiglighted();
+            SetHighlighted();
         }
         else
         {
-            SetUnhiglighted();
+            SetUnhighlighted();
         }
     }
 
@@ -66,7 +66,7 @@ public class LevelDisplay : MonoBehaviour, IUISelectable
         }
     }
 
-    private void SetHiglighted()
+    private void SetHighlighted()
     {
         if (_levelInfo.IsLocked)
         {
@@ -80,7 +80,7 @@ public class LevelDisplay : MonoBehaviour, IUISelectable
         }
     }
 
-    private void SetUnhiglighted()
+    private void SetUnhighlighted()
     {
         if (_levelInfo.IsLocked)
         {

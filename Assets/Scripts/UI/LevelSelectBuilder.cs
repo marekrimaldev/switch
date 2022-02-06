@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UISelector))]
 public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
 {
     [SerializeField] private LevelInfo[] _levelInfos;
@@ -14,10 +15,11 @@ public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
     [SerializeField] private int _spacing = 50;
     [SerializeField] private int _uiElementSize = 100;
 
-    private void Awake()
+    private void Start()
     {
         BuildLevelSelect();
         AssignAdjacency();
+        GetComponent<UISelector>().SetUIBuilder(this);
     }
 
     public IUISelectable GetFirstUISelectable()

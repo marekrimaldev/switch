@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class UISelector : MonoBehaviour
 {
-    [SerializeField] private LevelSelectBuilder _levelSelectBuilder;
-
     private IUIBuilder _uiBuilder;
     private IUISelectable _currLevelSelected;
 
-    private void OnLevelWasLoaded(int level)
+    private void OnEnable()
     {
-        _uiBuilder = FindObjectOfType<IUIBuilder>();
-        _currLevelSelected = _levelSelectBuilder.GetFirstUISelectable();
+        _currLevelSelected?.Highlight(true);
+    }
+
+    public void SetUIBuilder(IUIBuilder uiBuilder)
+    {
+        _uiBuilder = uiBuilder;
+        _currLevelSelected = _uiBuilder.GetFirstUISelectable();
         _currLevelSelected.Highlight(true);
     }
 
