@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] protected float _movementSpeed = 20;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     private Vector2 _velocity = Vector2.zero;
     private Rigidbody2D _rb;
 
-    private bool _isGrounded = false;
+    [SerializeField] private GroundCheckerBase _groudChecker;
 
     private Color _color;
     private SpriteRenderer _sr;
@@ -23,6 +24,9 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
         _color = _sr.color;
+
+        _groudChecker.OnGroundEnter += OnPlayerGroundEnter;
+        //_groudChecker.OnGroundExit += OnPlayerGroundExit;
     }
 
     private void Update()
@@ -38,10 +42,12 @@ public class Player : MonoBehaviour
         {
             _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
         }
-        else if (_rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-        {
-            _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
+
+        // Variable height jump
+        //else if (_rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        //{
+        //    _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
+        //}
     }
 
     protected void HandleInput()
@@ -49,11 +55,11 @@ public class Player : MonoBehaviour
         _velocity = new Vector2(0, _rb.velocity.y);
         _velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _movementSpeed, _rb.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && _groudChecker.IsGrounded)
         {
             _rb.AddForce(Vector2.up * _jumpForce);
-            _isGrounded = false;
-            _animator.SetBool("IsGrounded", _isGrounded);
+            _groudChecker.IsGrounded = false;
+            OnPlayerGroundExit();
         }
     }
 
@@ -78,28 +84,19 @@ public class Player : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionStay2D(Collision2D collision)
     {
-        _isGrounded = true;
-        _animator.SetBool("IsGrounded", _isGrounded);
-
-        IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
+        IInteractable interactable = collision.gameObject.GetComponentInParent<ICollisionInteractable>();
         if (interactable != null)
         {
             interactable.Interact(this);
         }
-
-        IParent parantable = collision.gameObject.GetComponentInParent<IParent>();
-        if (interactable != null)
-        {
-            parantable.AddChild(transform);
-        }
     }
 
-    // Read on OnCollisionEnter description
+    /// <summary>
+    /// Read on OnCollisionEnter summary
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //_isGrounded = true;
-        //_animator.SetBool("IsGrounded", _isGrounded);
-
         //IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
         //if (interactable != null)
         //{
@@ -113,9 +110,19 @@ public class Player : MonoBehaviour
         //}
     }
 
+    private void OnPlayerGroundExit()
+    {
+        _animator.SetBool("IsGrounded", false);
+    }
+
+    private void OnPlayerGroundEnter()
+    {
+        _animator.SetBool("IsGrounded", true);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
+        IInteractable interactable = collision.gameObject.GetComponentInParent<ITriggerInteractable>();
         if (interactable != null)
         {
             interactable.Interact(this);

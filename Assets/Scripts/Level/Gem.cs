@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gem : MonoBehaviour, IInteractable
+public class Gem : MonoBehaviour, ITriggerInteractable
 {
     [SerializeField] private VoidGameEvent OnLevelComplete;
 

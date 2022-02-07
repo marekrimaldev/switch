@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour, IInteractable, IParent
+public class Obstacle : MonoBehaviour, ICollisionInteractable
 {
     [SerializeField] private AudioClip _switchSound;      // sound from joedeshon // other is https://freesound.org/people/Erokia/sounds/411746/
 
@@ -26,17 +26,14 @@ public class Obstacle : MonoBehaviour, IInteractable, IParent
 
     public void Interact(Player player)
     {
-        if(player.GetComponentInChildren<SpriteRenderer>().color != _color)
+        player.transform.SetParent(transform);
+
+        if (player.GetComponentInChildren<SpriteRenderer>().color != _color)
         {
             _as.PlayOneShot(_switchSound);
 
             Void v;
             OnColorSwitchRequest.Raise(v);
         }
-    }
-
-    public void AddChild(Transform t)
-    {
-        t.SetParent(transform);
     }
 }
