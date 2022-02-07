@@ -17,7 +17,7 @@ public class Gem : MonoBehaviour, IInteractable
     private void Start()
     {
         _as = GetComponent<AudioSource>();
-        GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+        //GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
 
         StartCoroutine(Rotate());
     }

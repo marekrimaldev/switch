@@ -10,6 +10,10 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
     [SerializeField] private Image _buttonImage;
     private Button _button;
 
+    [SerializeField] private AudioClip _highlightSound;
+    [SerializeField] private AudioClip _selectSound;
+    private AudioSource _as;
+
     public IUISelectable LeftSuccessor { get; set; }
     public IUISelectable RightSuccessor { get; set; }
     public IUISelectable UpSuccessor { get; set; }
@@ -18,13 +22,16 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _as = GetComponent<AudioSource>();
     }
 
-    public void Highlight(bool value)
+    public void Highlight(bool value, bool playSound = false)
     {
         if (value)
         {
-            //_as.PlayOneShot(_highlightSound);
+            if(playSound)
+                _as.PlayOneShot(_highlightSound);
+
             SetHighlighted();
         }
         else
@@ -35,7 +42,13 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
 
     public void Select()
     {
-        // SOUND
+        GameObject go = new GameObject("Persistent sound player");
+        go.AddComponent<AudioSource>();
+        DontDestroyOnLoad(go);
+        go.GetComponent<AudioSource>().volume = 0.5f;
+        go.GetComponent<AudioSource>().PlayOneShot(_selectSound);
+        Destroy(go, 1);
+
         _button.onClick.Invoke();
     }
 

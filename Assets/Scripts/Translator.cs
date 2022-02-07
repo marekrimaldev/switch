@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Translator : MonoBehaviour
 {
-    [SerializeField] private Transform _minPoint;
-    [SerializeField] private Transform _maxPoint;
     [SerializeField] private float _speed = 1;
-    [SerializeField] private bool _isGoingUp = true;
+    [Tooltip("Defines the path of this object. If no pathpoints are assigned this component is ignored.")]
+    [SerializeField] private Transform[] _pathPoints;
+    private int _nextPointIdx = 0;
 
     private Rigidbody2D _rb;
 
@@ -15,31 +15,27 @@ public class Translator : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
 
-        if (_isGoingUp)
-            StartCoroutine(GoUp());
-        else
-            StartCoroutine(GoDown());
+        if(_pathPoints.Length != 0)
+            StartCoroutine(Move());
     }
 
-    private IEnumerator GoUp()
+    private IEnumerator Move()
     {
-        while (transform.position.y < _maxPoint.position.y)
+        while (true)
         {
-            _rb.velocity = transform.up * _speed * Time.deltaTime;
-            yield return null;
+            Vector3 vec = _pathPoints[_nextPointIdx].position - transform.position;
+            Vector3 dir = vec.normalized;
+            while (vec.magnitude > 0.1)
+            {
+                //transform.position += dir * _speed * Time.deltaTime;
+                transform.Translate(dir * _speed * Time.deltaTime, Space.World);
+                vec = _pathPoints[_nextPointIdx].position - transform.position;
+
+                yield return null;
+            }
+
+            _nextPointIdx++;
+            _nextPointIdx = _nextPointIdx % _pathPoints.Length;
         }
-
-        StartCoroutine(GoDown());
-    }
-
-    private IEnumerator GoDown()
-    {
-        while (transform.position.y > _minPoint.position.y)
-        {
-            _rb.velocity = -transform.up * _speed * Time.deltaTime;
-            yield return null;
-        }
-
-        StartCoroutine(GoUp());
     }
 }

@@ -35,11 +35,13 @@ public class LevelDisplay : MonoBehaviour, IUISelectable
         SetUnhighlighted();
     }
 
-    public void Highlight(bool value)
+    public void Highlight(bool value, bool playSound = true)
     {
         if (value)
         {
-            _as.PlayOneShot(_highlightSound);
+            if(playSound)
+                _as.PlayOneShot(_highlightSound);
+
             SetHighlighted();
         }
         else

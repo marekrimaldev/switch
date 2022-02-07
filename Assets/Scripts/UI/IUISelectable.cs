@@ -13,6 +13,6 @@ public interface IUISelectable
     IUISelectable UpSuccessor { get; set; }
     IUISelectable DownSuccessor { get; set; }
 
-    void Highlight(bool value);
+    void Highlight(bool value, bool playSound = true);
     void Select();
 }

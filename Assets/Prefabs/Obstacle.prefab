@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937625017867721523}
   - component: {fileID: 7775812962383924495}
+  - component: {fileID: 2900304290759046863}
   - component: {fileID: 327504036}
   m_Layer: 0
   m_Name: Obstacle
@@ -47,6 +48,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchSound: {fileID: 8300000, guid: a816053a1dfeb8b4993d536eff4f4983, type: 3}
   OnColorSwitchRequest: {fileID: 11400000, guid: 6e76f3eb15a3a194fb895c94e28d3ffc, type: 2}
+--- !u!114 &2900304290759046863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920973075045115231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10565fe5ed3c25459c035723a3df9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 1
+  _pathPoints: []
 --- !u!82 &327504036
 AudioSource:
   m_ObjectHideFlags: 0
@@ -235,7 +250,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7184521062098606929}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5b44291555800484599c2852d4615fa0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        //if(SceneManager.GetActiveScene().buildIndex + 1 <= SceneManager.sceneCount)
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -23,5 +24,17 @@ public class LevelManager : MonoBehaviour
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            LoadNextLevel();
+        }
     }
 }
