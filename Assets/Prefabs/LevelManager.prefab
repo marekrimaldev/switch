@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chapterInfo: {fileID: 11400000, guid: 3093d9d03eeaae44c8dc77c8f852e20b, type: 2}
   _levelIndex: 0
+  OnLevelRestart: {fileID: 11400000, guid: ae2717abdd10afb47ac5cb6e7f4f0c12, type: 2}
 --- !u!114 &2403656710843156134
 MonoBehaviour:
   m_ObjectHideFlags: 0

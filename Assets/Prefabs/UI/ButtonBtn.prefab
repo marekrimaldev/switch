@@ -65,6 +65,7 @@ MonoBehaviour:
   _buttonImage: {fileID: 7972770283358940537}
   _highlightSound: {fileID: 8300000, guid: a816053a1dfeb8b4993d536eff4f4983, type: 3}
   _selectSound: {fileID: 8300000, guid: a816053a1dfeb8b4993d536eff4f4983, type: 3}
+  _unavailableSound: {fileID: 8300000, guid: 71f1c0ab23a478a49b61306b814888ad, type: 3}
 --- !u!114 &7972770283358940537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,8 +141,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameMenu, Assembly-CSharp
-        m_MethodName: ToggleMenu
+        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
+        m_MethodName: LoadProgress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -312,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: resume
+  m_text: load game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eabb694b7b530d4498cef646cb790953, type: 2}
   m_sharedMaterial: {fileID: 4095181865762060338, guid: eabb694b7b530d4498cef646cb790953, type: 2}

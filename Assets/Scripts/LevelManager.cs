@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private ChapterInfo _chapterInfo;
     [SerializeField] private int _levelIndex = 0;
 
+    [SerializeField] private VoidGameEvent OnLevelRestart;
+
     public void LoadLevel(string levelName)
     {
         SceneManager.LoadScene(levelName);
@@ -32,7 +34,20 @@ public class LevelManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        Void v;
+        OnLevelRestart.Raise(v);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public int GetBuildIdxFromSceneName(string sceneName)
+    {
+        return SceneManager.GetSceneByName(sceneName).buildIndex;
+    }
+
+    public string GetCurrSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
     }
 
     public void QuitApplication()

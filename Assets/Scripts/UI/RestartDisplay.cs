@@ -14,7 +14,7 @@ public class RestartDisplay : MonoBehaviour
 
     private void Start()
     {
-        RestartCounter rc = FindObjectOfType<RestartCounter>();
+        StoryManager rc = FindObjectOfType<StoryManager>();
         if (rc != null)
         {
             _scoreText.text = rc.Restarts.ToString();
@@ -26,26 +26,20 @@ public class RestartDisplay : MonoBehaviour
     {
         int starCount = 0;
 
-        if (restarts < _goldThreshold)
+        if (restarts <= _goldThreshold)
         {
             starCount = 3;
         }
-        else if (restarts < _silverThreshold)
+        else if (restarts <= _silverThreshold)
         {
             starCount = 2;
         }
-        else if (restarts < _bronzeThreshold)
+        else if (restarts <= _bronzeThreshold)
         {
             starCount = 1;
         }
 
-        int i;
-        for (i = 0; i < starCount; i++)
-        {
-            _stars[i].color = Color.yellow;
-        }
-
-        for (; i < _stars.Length; i++)
+        for (int i = starCount; i < _stars.Length; i++)
         {
             _stars[i].color = Color.gray;
         }

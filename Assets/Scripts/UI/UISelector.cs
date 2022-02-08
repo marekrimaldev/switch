@@ -5,11 +5,16 @@ using System.Linq;
 
 public class UISelector : MonoBehaviour
 {
+    [SerializeField] private bool _startOnFirstSelectable = false;
+
     private IUIBuilder _uiBuilder;
     private IUISelectable _currSelectable;
 
     private void OnEnable()
     {
+        if (_startOnFirstSelectable)
+            _currSelectable = _uiBuilder.GetFirstUISelectable();
+
         _currSelectable?.Highlight(true, false);
     }
 
