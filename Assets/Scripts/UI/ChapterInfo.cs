@@ -10,7 +10,7 @@ public class ChapterInfo : ScriptableObject
 
     public void UnlockNextLevel(int currLevelIndex)
     {
-        if (currLevelIndex + 1 <= _levelInfos.Length)
+        if (currLevelIndex + 1 < _levelInfos.Length)
             _levelInfos[currLevelIndex + 1].IsLocked = false;
     }
 }

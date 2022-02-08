@@ -5,6 +5,7 @@ using UnityEngine;
 public class InGameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _inGameMenuCanvas;
+    private Canvas[] _otherSceneCanvases;
 
     [SerializeField] private StringGameEvent OnLoadMainMenuRequest;
 
@@ -33,6 +34,33 @@ public class InGameMenu : MonoBehaviour
     {
         _inGameMenuCanvas.SetActive(!_inGameMenuCanvas.activeSelf);
         _uiSelector.enabled = !_uiSelector.enabled;
+
+        EnableSceneCanvases(!_inGameMenuCanvas.activeSelf);
+    }
+
+    private void EnableSceneCanvases(bool enable)
+    {
+        if (!enable)
+        {
+            _otherSceneCanvases = FindObjectsOfType<Canvas>();
+            for (int i = 0; i < _otherSceneCanvases.Length; i++)
+            {
+                if (_otherSceneCanvases[i].gameObject == _inGameMenuCanvas)
+                    continue;
+
+                _otherSceneCanvases[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _otherSceneCanvases.Length; i++)
+            {
+                if (_otherSceneCanvases[i].gameObject == _inGameMenuCanvas)
+                    continue;
+
+                _otherSceneCanvases[i].gameObject.SetActive(true);
+            }
+        }
     }
 
     public void LoadMainMenu()

@@ -49,6 +49,7 @@ MonoBehaviour:
   OnLevelComplete: {fileID: 11400000, guid: 191761053396a7549a6cadc27fe11a6a, type: 2}
   _rotationSpeed: 50
   _animationSpeed: 50
+  _raiseCompleteInSeconds: 2
   _pickUpSound: {fileID: 8300000, guid: d627ee1fc51e9bf4e98e48aee9a5697e, type: 3}
 --- !u!50 &3599447957375141067
 Rigidbody2D:
@@ -240,7 +241,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 68e500a7a15fca94b8d537368bf0e962, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.8205226, b: 0, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
