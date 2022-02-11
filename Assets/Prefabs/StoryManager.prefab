@@ -650,6 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7748582484444601077}
   - component: {fileID: 7748582484444601076}
+  - component: {fileID: 1041625611903450343}
   - component: {fileID: 7748582484444601075}
   - component: {fileID: 1573136431}
   - component: {fileID: 845789600}
@@ -687,8 +688,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42640ad3cb939824a9863ed293b371e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storySceneName: Story
-  _mainMenuSceneName: MainMenu
+  _nonGameSceneNames:
+  - MainMenu
+  - Story
+  - Intro
+  _storyUI: {fileID: 1041625611903450343}
+--- !u!114 &1041625611903450343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748582484444601074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ef31bcb36cd5f4b874c5cd30574d03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _UI: {fileID: 394401359}
   _restartsText: {fileID: 1262674193}
   _thresholds:
   - {fileID: 2104296044}

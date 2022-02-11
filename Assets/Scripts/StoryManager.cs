@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class StoryManager : MonoBehaviour
 {
-    [SerializeField] private string _storySceneName;
-    [SerializeField] private string _mainMenuSceneName;
-
-    [Header("UI")]
-    [SerializeField] private TMP_Text _restartsText;
-    [SerializeField] private TMP_Text[] _thresholds;
+    [SerializeField] private string[] _nonGameSceneNames;
+    private List<string> _nonGameSceneNamesList = new List<string>();
 
     public int Restarts { get; private set; } = 0;
+    public bool IsStoryModeOn { get; set; } = false;
 
-    private LevelManager _levelManager;
+    [SerializeField] private StoryUI _storyUI;
 
     private const string ProgressKey = "StoryLevelName";
     private const string RestartKey = "RestartCount";
 
+    private LevelManager _levelManager;
+
     private void Awake()
     {
-        _levelManager = FindObjectOfType<LevelManager>();
+        StoryManager sm = FindObjectOfType<StoryManager>();
+        if (sm != null && sm != this)
+            Destroy(this.gameObject);
+
+        for (int i = 0; i < _nonGameSceneNames.Length; i++)
+        {
+            _nonGameSceneNamesList.Add(_nonGameSceneNames[i]);
+        }
     }
 
     private void OnLevelWasLoaded(int level)
@@ -30,12 +35,19 @@ public class StoryManager : MonoBehaviour
         if(_levelManager == null)
             Debug.LogError("LevelManager cant be found");
 
-        SwitchUIToColor(Color.black);
+        string currSceneName =_levelManager.GetCurrSceneName();
 
-        if (_levelManager.GetCurrSceneName() == _mainMenuSceneName)
-            Destroy(gameObject);
-        else if (_levelManager.GetCurrSceneName() != _storySceneName)
-            SaveProgress();
+        if (IsGameScene(currSceneName))
+        {
+            _storyUI.ShowUI(true);
+
+            if (IsStoryModeOn)
+                SaveProgress();
+        }
+        else
+        {
+            _storyUI.ShowUI(false);
+        }
     }
 
     public void StartNewGame()
@@ -55,18 +67,21 @@ public class StoryManager : MonoBehaviour
             _levelManager.LoadLevel(sceneToLoadName);
         }
 
-        UpdateRestarts();
+        _storyUI.UpdateRestarts(Restarts);
     }
 
     public bool CanLoadProgress()
     {
+        if(PlayerPrefs.HasKey(ProgressKey))
+            Debug.Log("Saved scene = " + PlayerPrefs.GetString(ProgressKey));
+
         return PlayerPrefs.HasKey(ProgressKey);
     }
 
     public void ResetProgress()
     {
         Restarts = 0;
-        UpdateRestarts();
+        _storyUI.UpdateRestarts(Restarts);
         PlayerPrefs.DeleteKey(ProgressKey);
     }
 
@@ -83,33 +98,16 @@ public class StoryManager : MonoBehaviour
     public void OnLevelRestart()
     {
         Restarts++;
-        UpdateRestarts();
+        _storyUI.UpdateRestarts(Restarts);
     }
 
-    public void OnColorSwitch()
+    public bool IsStoryCompleted()
     {
-        if (_restartsText.color == Color.white)
-            SwitchUIToColor(Color.black);
-        else
-            SwitchUIToColor(Color.white);
+        return PlayerPrefs.GetString(ProgressKey) == "Credits";
     }
 
-    private void SwitchUIToColor(Color color)
+    private bool IsGameScene(string sceneName)
     {
-        _restartsText.color = color;
-        for (int i = 0; i < _thresholds.Length; i++)
-        {
-            _thresholds[i].color = color;
-        }
-    }
-
-    private void UpdateRestarts()
-    {
-        string rs = "";
-        for (int i = 0; i < Restarts; i++)
-        {
-            rs += ". ";
-        }
-        _restartsText.text = rs;
+        return !_nonGameSceneNamesList.Contains(sceneName);
     }
 }

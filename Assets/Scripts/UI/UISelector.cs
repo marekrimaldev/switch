@@ -12,7 +12,7 @@ public class UISelector : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_startOnFirstSelectable)
+        if (_uiBuilder != null && _startOnFirstSelectable)
             _currSelectable = _uiBuilder.GetFirstUISelectable();
 
         _currSelectable?.Highlight(true, false);

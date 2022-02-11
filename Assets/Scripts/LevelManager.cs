@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
+        Debug.Log("Loading level " + levelName);
         SceneManager.LoadScene(levelName);
     }
 
@@ -26,10 +27,11 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
+        int currSceneBuildIdx = SceneManager.GetActiveScene().buildIndex;
         if ((int)(SceneManager.GetActiveScene().buildIndex + 1) < SceneManager.sceneCountInBuildSettings)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            LoadLevel(SceneManager.GetSceneByBuildIndex(currSceneBuildIdx + 1).name);
         else
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).name);
     }
 
     public void RestartLevel()

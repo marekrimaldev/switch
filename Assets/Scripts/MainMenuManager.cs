@@ -6,6 +6,16 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject[] _subMenus;
+    [SerializeField] private ButtonDisplay _levelSelectButtonDisplay;
+
+    private void Start()
+    {
+        StoryManager sm = FindObjectOfType<StoryManager>();
+        if (sm.IsStoryCompleted())
+            _levelSelectButtonDisplay.SetAvailable(true);
+        else
+            _levelSelectButtonDisplay.SetAvailable(false);
+    }
 
     private void Update()
     {
@@ -13,6 +23,7 @@ public class MainMenuManager : MonoBehaviour
         {
             ShowMainMenu();
         }
+
     }
 
     private void OnLevelWasLoaded(int level)
