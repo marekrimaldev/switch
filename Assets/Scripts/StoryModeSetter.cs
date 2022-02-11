@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class StoryModeSetter : MonoBehaviour
 {
-    [SerializeField] private bool _setStoryMode;
+    [SerializeField] private BoolGameEvent OnSetStoryMode;
 
-    private void OnLevelWasLoaded(int level)
+    public void SetStoryMode(bool value)
     {
-        StoryManager sm = FindObjectOfType<StoryManager>();
-        if(sm != null)
-        {
-            sm.IsStoryModeOn = _setStoryMode;
-        }
+        OnSetStoryMode.Raise(value);
     }
 }

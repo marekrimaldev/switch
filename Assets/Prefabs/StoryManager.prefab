@@ -651,9 +651,12 @@ GameObject:
   - component: {fileID: 7748582484444601077}
   - component: {fileID: 7748582484444601076}
   - component: {fileID: 1041625611903450343}
+  - component: {fileID: 1514133673767847901}
   - component: {fileID: 7748582484444601075}
-  - component: {fileID: 1573136431}
   - component: {fileID: 845789600}
+  - component: {fileID: 3624861027175330727}
+  - component: {fileID: 959146656396498840}
+  - component: {fileID: 376278205}
   m_Layer: 0
   m_Name: StoryManager
   m_TagString: Untagged
@@ -688,10 +691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42640ad3cb939824a9863ed293b371e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nonGameSceneNames:
-  - MainMenu
-  - Story
-  - Intro
+  _mainMenuSceneName: MainMenu
+  _creditsSceneName: Credits
+  _chapters:
+  - {fileID: 11400000, guid: 3093d9d03eeaae44c8dc77c8f852e20b, type: 2}
   _storyUI: {fileID: 1041625611903450343}
 --- !u!114 &1041625611903450343
 MonoBehaviour:
@@ -711,6 +714,18 @@ MonoBehaviour:
   - {fileID: 2104296044}
   - {fileID: 96768764}
   - {fileID: 2034855518}
+--- !u!114 &1514133673767847901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748582484444601074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2f11cc12bc8824eb223e591bc1ed8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7748582484444601075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,34 +738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5396fabc6fe228544affe89961c4cc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1573136431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748582484444601074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081c203fdb0f4454f8bc1bbdea5ed770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: ae2717abdd10afb47ac5cb6e7f4f0c12, type: 2}
-  UnityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7748582484444601076}
-        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
-        m_MethodName: OnLevelRestart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &845789600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,10 +754,94 @@ MonoBehaviour:
   UnityEvent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1041625611903450343}
+        m_TargetAssemblyTypeName: StoryUI, Assembly-CSharp
+        m_MethodName: SwitchUIColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3624861027175330727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748582484444601074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081c203fdb0f4454f8bc1bbdea5ed770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 191761053396a7549a6cadc27fe11a6a, type: 2}
+  UnityEvent:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 7748582484444601076}
         m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
-        m_MethodName: OnColorSwitch
+        m_MethodName: OnLevelWasCompleted
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &959146656396498840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748582484444601074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908cefd016cbd8d448c8fc68853e6ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 76f132329284d6a4fa2a750da56619b5, type: 2}
+  UnityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1514133673767847901}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &376278205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748582484444601074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9dd10cec17751141b999592950ed84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 7271b8a71635f604882762a5ffe0a69b, type: 2}
+  UnityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7748582484444601076}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: set_IsStoryModeOn
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

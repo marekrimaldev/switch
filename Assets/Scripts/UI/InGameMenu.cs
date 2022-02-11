@@ -14,6 +14,7 @@ public class InGameMenu : MonoBehaviour
     private void Awake()
     {
         _uiSelector = GetComponent<UISelector>();
+        SetTimeScale(1);
     }
 
     private void Start()
@@ -36,6 +37,16 @@ public class InGameMenu : MonoBehaviour
         _uiSelector.enabled = !_uiSelector.enabled;
 
         EnableSceneCanvases(!_inGameMenuCanvas.activeSelf);
+
+        if (_inGameMenuCanvas.activeSelf)
+            SetTimeScale(0);
+        else
+            SetTimeScale(1);
+    }
+
+    private void SetTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
     }
 
     private void EnableSceneCanvases(bool enable)

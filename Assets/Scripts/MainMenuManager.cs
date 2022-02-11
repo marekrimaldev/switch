@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        StoryManager sm = FindObjectOfType<StoryManager>();
+        GameManager sm = FindObjectOfType<GameManager>();
         if (sm.IsStoryCompleted())
             _levelSelectButtonDisplay.SetAvailable(true);
         else

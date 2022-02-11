@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnityEventOnKeyPress : MonoBehaviour
+public class UnityEventOnKeyPress : EventOnKeyPressBase
 {
-    [SerializeField] private KeyCode _key;
-
     [SerializeField] private UnityEvent OnKeyPress;
 
-    private void Update()
+    protected override void InvokeEvent()
     {
-        if (Input.GetKeyDown(_key))
-        {
-            OnKeyPress.Invoke();
-        }
+        OnKeyPress?.Invoke();
     }
 }

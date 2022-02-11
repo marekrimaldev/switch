@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7305141aac03872408fa40a6ce4a615d, type: 3}
-  m_Name: Intro
+  m_Script: {fileID: 11500000, guid: 307f9eeb3a6b0c64fa23a6ef40c84e98, type: 3}
+  m_Name: OnSetStoryMode
   m_EditorClassIdentifier: 
-  _levelName: 
-  _isLocked: 0

@@ -6,36 +6,26 @@ public class StoryMenuManager : MonoBehaviour
 {
     [SerializeField] private ButtonDisplay _loadGameButtonDisplay;
 
-    private StoryManager _storyManager;
-
     private void Start()
     {
-        StoryManager sm = FindObjectOfType<StoryManager>();
-        if(sm != null)
-        {
-            if (sm.CanLoadProgress())
-                _loadGameButtonDisplay.SetAvailable(true);
-            else
-                _loadGameButtonDisplay.SetAvailable(false);
-        }
+        if (GameManager.Instance.CanLoadProgress())
+            _loadGameButtonDisplay.SetAvailable(true);
         else
-        {
-            Debug.LogWarning("StoryManager not found");
-        }
+            _loadGameButtonDisplay.SetAvailable(false);
     }
 
     public void StartNewStory()
     {
-        _storyManager?.StartNewGame();
+        GameManager.Instance.StartNewGame();
     }
 
     public void ResetStoryProgress()
     {
-        _storyManager?.ResetProgress();
+        GameManager.Instance.ResetProgress();
     }
 
     public void LoadStoryProgress()
     {
-        _storyManager?.LoadProgress();
+        GameManager.Instance.LoadProgress();
     }
 }

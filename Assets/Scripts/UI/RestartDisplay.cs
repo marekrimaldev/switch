@@ -14,7 +14,7 @@ public class RestartDisplay : MonoBehaviour
 
     private void Start()
     {
-        StoryManager rc = FindObjectOfType<StoryManager>();
+        GameManager rc = FindObjectOfType<GameManager>();
         if (rc != null)
         {
             _scoreText.text = rc.Restarts.ToString();

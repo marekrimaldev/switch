@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73481dbab9d1d1843a19ca4d0aa2e882, type: 3}
   m_Name: Chapter01
   m_EditorClassIdentifier: 
-  _chapterName: WhiteChapter
+  _chapterName: Chapter One
+  _scoreScene: {fileID: 11400000, guid: 5bd15cbb9b6ce61449c63cf0d8580bfb, type: 2}
+  _mainMenuScene: {fileID: 11400000, guid: ef046ffa33c577a4497c02effea3e49a, type: 2}
   _levelInfos:
-  - {fileID: 11400000, guid: 22f002ecef6f68d48ba85bc15af0d359, type: 2}
   - {fileID: 11400000, guid: 1335ec529ab73284fb29743b51467b68, type: 2}
   - {fileID: 11400000, guid: 2f8bcca96f8043b4dbf0350b835a0df6, type: 2}
   - {fileID: 11400000, guid: 7609b14e86a2e7947bd564e7081317a8, type: 2}

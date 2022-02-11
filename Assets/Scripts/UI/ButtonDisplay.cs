@@ -12,6 +12,14 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
 
     private bool _isAvailable = true;
 
+    [Header("Colors")]
+    [SerializeField] private Color _textUnselectColor = Color.white;
+    [SerializeField] private Color _textSelectColor = Color.black;
+    [SerializeField] private Color _textUnavailableColor = Color.gray;
+    [SerializeField] private Color _backUnselectColor = Color.black;
+    [SerializeField] private Color _backSelectColor = Color.yellow;
+
+    [Header("Sound")]
     [SerializeField] private AudioClip _highlightSound;
     [SerializeField] private AudioClip _selectSound;
     [SerializeField] private AudioClip _unavailableSound;
@@ -26,6 +34,8 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
     {
         _button = GetComponent<Button>();
         _as = GetComponent<AudioSource>();
+
+        SetUnhighlighted();
     }
 
     public void Highlight(bool value, bool playSound = false)
@@ -70,21 +80,21 @@ public class ButtonDisplay : MonoBehaviour, IUISelectable
 
     private void SetHighlighted()
     {
-        _buttonImage.color = Color.yellow;
+        _buttonImage.color = _backSelectColor;
 
         if(_isAvailable)
-            _buttonText.color = Color.black;
+            _buttonText.color = _textSelectColor;
         else
-            _buttonText.color = Color.gray;
+            _buttonText.color = _textUnavailableColor;
     }
 
     private void SetUnhighlighted()
     {
-        _buttonImage.color = Color.black;
+        _buttonImage.color = _backUnselectColor;
 
         if (_isAvailable)
-            _buttonText.color = Color.white;
+            _buttonText.color = _textUnselectColor;
         else
-            _buttonText.color = Color.gray;
+            _buttonText.color = _textUnavailableColor;
     }
 }

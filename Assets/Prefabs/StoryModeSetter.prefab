@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6032778f33fba44eb9e06040781ff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _setStoryMode: 1
+  OnSetStoryMode: {fileID: 11400000, guid: 7271b8a71635f604882762a5ffe0a69b, type: 2}
