@@ -14,13 +14,13 @@ TagManager:
   - 
   - 
   - 
-  - White
-  - Black
-  - WhiteCollision
-  - BlackCollision
+  - 
+  - Obstacle
+  - Player
   - 
   - 
-  - Gem
+  - 
+  - 
   - 
   - 
   - 

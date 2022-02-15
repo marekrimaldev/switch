@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7723117473400319848}
-  - component: {fileID: 152084200807620325}
+  - component: {fileID: 4933562587214059841}
   - component: {fileID: 1132901952934954247}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 7178127144998667957}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &152084200807620325
+--- !u!114 &4933562587214059841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 3067738176758265111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b81fe7c08cd5f043811bd75327d965f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a501da8cdd3b084097acf4ca88c7abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _triggerState: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  OnTrigger: {fileID: 0}
+  OnTriggerUE:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7178127144998667958}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnPlayerGroundEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _disableTime: 0.05
 --- !u!70 &1132901952934954247
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -69,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080165383187358195}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BodyScaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,10 +122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7178127144301624730}
   - component: {fileID: 7178127144301624729}
-  - component: {fileID: 7178127144301624728}
-  - component: {fileID: 2673223812399096763}
   - component: {fileID: 5310835634032888582}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,48 +195,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7178127144301624728
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178127144301624731}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.00010601734}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.01, y: 0.01}
-    newSize: {x: 0.01, y: 0.01}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.009606708, y: 0.009351626}
-  m_EdgeRadius: 0
---- !u!58 &2673223812399096763
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178127144301624731}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00000000745058, y: -0.00000000745058}
-  serializedVersion: 2
-  m_Radius: 0.0034520053
 --- !u!70 &5310835634032888582
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -243,11 +220,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7178127144998667957}
-  - component: {fileID: 7178127144998667958}
-  - component: {fileID: 7178127144998667956}
   - component: {fileID: 1087832041}
+  - component: {fileID: 7178127144998667958}
+  - component: {fileID: 7368607938772423804}
+  - component: {fileID: 7178127144998667956}
   - component: {fileID: 1749913126}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,6 +248,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087832041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178127144998667959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081c203fdb0f4454f8bc1bbdea5ed770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 6e76f3eb15a3a194fb895c94e28d3ffc, type: 2}
+  UnityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7368607938772423804}
+        m_TargetAssemblyTypeName: ColorSwitcher, Assembly-CSharp
+        m_MethodName: SwitchColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7178127144998667958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +291,21 @@ MonoBehaviour:
   _movementSpeed: 200
   _jumpForce: 400
   _fallMultiplier: 2
-  _groudChecker: {fileID: 152084200807620325}
+--- !u!114 &7368607938772423804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178127144998667959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643fd3c999f83e044bd71f530e756199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color01: {r: 0, g: 0, b: 0, a: 1}
+  _color02: {r: 1, g: 1, b: 1, a: 1}
+  _sr: {fileID: 7178127144301624729}
 --- !u!50 &7178127144998667956
 Rigidbody2D:
   serializedVersion: 4
@@ -307,34 +327,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1087832041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178127144998667959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081c203fdb0f4454f8bc1bbdea5ed770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 6e76f3eb15a3a194fb895c94e28d3ffc, type: 2}
-  UnityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7178127144998667958}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: SwitchColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &1749913126
 Animator:
   serializedVersion: 3
