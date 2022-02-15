@@ -1,43 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Gem : MonoBehaviour, ITriggerInteractable
 {
     [SerializeField] private VoidGameEvent OnLevelComplete;
+    [SerializeField] private UnityEvent OnInteract;
 
-    [SerializeField] private float _rotationSpeed = 1;
-    [SerializeField] private float _animationSpeed = 1;
-    [SerializeField] private float _raiseCompleteInSeconds = 2f;
+    [SerializeField] private float _nextLevelInSeconds = 2f;
     [SerializeField] private AudioClip _pickUpSound;
     private AudioSource _as;
 
     private bool _triggered = false;
 
-    private void Start()
+    private void Awake()
     {
         _as = GetComponent<AudioSource>();
-        //GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
-
-        StartCoroutine(Rotate());
-    }
-
-    private IEnumerator Rotate()
-    {
-        while (true)
-        {
-            transform.Rotate(Vector3.forward * _rotationSpeed * Time.deltaTime);
-            yield return null;
-        }
-    }
-
-    private IEnumerator LevelCompleteAnimation()
-    {
-        while (gameObject.activeSelf)
-        {
-            transform.localScale += new Vector3(1,1,1) * _animationSpeed * Time.deltaTime;
-            yield return null;
-        }
     }
 
     public void Interact(Player player)
@@ -48,9 +27,9 @@ public class Gem : MonoBehaviour, ITriggerInteractable
         _triggered = true;
 
         _as.PlayOneShot(_pickUpSound);
-        StartCoroutine(LevelCompleteAnimation());
+        OnInteract.Invoke();
 
-        Invoke("OnLevelCompleteRaise", _raiseCompleteInSeconds);
+        Invoke("OnLevelCompleteRaise", _nextLevelInSeconds);
     }
 
     private void OnLevelCompleteRaise()

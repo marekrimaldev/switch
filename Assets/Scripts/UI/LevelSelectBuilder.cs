@@ -12,8 +12,8 @@ public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
     private List<IUISelectable> _levelDisplays = new List<IUISelectable>();
 
     [SerializeField] private int _levelsPerRow = 5;
-    [SerializeField] private int _spacing = 50;
-    [SerializeField] private int _uiElementSize = 100;
+    [SerializeField] private float _spacing = 50;
+    [SerializeField] private float _uiElementSize = 100;
 
     private void Start()
     {
@@ -29,8 +29,10 @@ public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
 
     private void BuildLevelSelect()
     {
-        float stepX = _uiElementSize + _spacing;
-        float stepY = _uiElementSize + _spacing;
+        Debug.Log(_levelDisplayPrefab.GetComponent<RectTransform>().lossyScale.x);
+        ;
+        float stepX = (_uiElementSize + _spacing) * _levelDisplayPrefab.GetComponent<RectTransform>().rect.width;
+        float stepY = (_uiElementSize + _spacing) * _levelDisplayPrefab.GetComponent<RectTransform>().rect.height;
 
         int shouldShift = _levelsPerRow % 2 == 0 ? 1 : 0;   // Shift the start pos if there is even number of levels per row
         Vector2 startPos = Vector2.zero - (_levelsPerRow / 2) * stepX * Vector2.right + shouldShift * stepX * Vector2.right;
@@ -42,6 +44,7 @@ public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
             Vector2 pos = startPos + x * stepX * Vector2.right - y * stepY * Vector2.up;
 
             LevelDisplay levelDisplay = Instantiate(_levelDisplayPrefab, Vector2.zero, Quaternion.identity, transform);
+            levelDisplay.transform.localScale = new Vector2(_uiElementSize, _uiElementSize);
             levelDisplay.transform.localPosition = pos;
             levelDisplay.DisplayLevel(_levelInfos[i]);
             _levelDisplays.Add(levelDisplay);

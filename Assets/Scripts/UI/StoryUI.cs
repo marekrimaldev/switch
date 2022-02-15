@@ -9,11 +9,6 @@ public class StoryUI : MonoBehaviour
     [SerializeField] private TMP_Text _restartsText;
     [SerializeField] private TMP_Text[] _thresholds;
 
-    private void OnEnable()
-    {
-        SwitchUIToColor(Color.black);   
-    }
-
     public void ShowUI(bool value)
     {
         _UI.SetActive(value);
@@ -27,7 +22,7 @@ public class StoryUI : MonoBehaviour
             SwitchUIToColor(Color.white);
     }
 
-    private void SwitchUIToColor(Color color)
+    public void SwitchUIToColor(Color color)
     {
         _restartsText.color = color;
         for (int i = 0; i < _thresholds.Length; i++)

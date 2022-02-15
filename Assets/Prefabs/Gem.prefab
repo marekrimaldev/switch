@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3599447957375141069}
   - component: {fileID: 3599447957375141066}
+  - component: {fileID: 234637324196776399}
+  - component: {fileID: 5469199603257753281}
   - component: {fileID: 3599447957375141067}
   - component: {fileID: 1385969091}
   m_Layer: 15
@@ -47,10 +49,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnLevelComplete: {fileID: 11400000, guid: 191761053396a7549a6cadc27fe11a6a, type: 2}
-  _rotationSpeed: 50
-  _animationSpeed: 50
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5469199603257753281}
+        m_TargetAssemblyTypeName: Scaler, Assembly-CSharp
+        m_MethodName: StartScaling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _raiseCompleteInSeconds: 2
   _pickUpSound: {fileID: 8300000, guid: d627ee1fc51e9bf4e98e48aee9a5697e, type: 3}
+--- !u!114 &234637324196776399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599447957375141068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87821835506ad1d44a66c9588ac3507c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 50
+  _startAutomaticaly: 1
+--- !u!114 &5469199603257753281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599447957375141068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5350219768fb8844a85fba790a6875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleSpeed: 40
 --- !u!50 &3599447957375141067
 Rigidbody2D:
   serializedVersion: 4

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
             _instance = this;
 
         _levelManager = GetComponent<LevelManager>();
+        _storyUI.ShowUI(false);
     }
 
     private void Update()
@@ -60,12 +61,14 @@ public class GameManager : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         string currSceneName =_levelManager.GetCurrSceneName();
-        if (currSceneName != _mainMenuSceneName)
+        if (IsStoryModeOn)
         {
-            _storyUI.ShowUI(true);
-
-            if (IsStoryModeOn)
+            if (currSceneName != _mainMenuSceneName)
+            {
                 SaveProgress();
+                _storyUI.ShowUI(true);
+                _storyUI.SwitchUIToColor(Color.black);
+            }
         }
         else
         {

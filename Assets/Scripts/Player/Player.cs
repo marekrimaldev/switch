@@ -8,15 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] protected float _movementSpeed = 20;
     [SerializeField] protected float _jumpForce = 20;
     [SerializeField] protected float _fallMultiplier = 2f;
-
-    private Vector2 _velocity = Vector2.zero;
-    private Rigidbody2D _rb;
-
     [SerializeField] private GroundCheckerBase _groudChecker;
 
+    private Rigidbody2D _rb;
     private Color _color;
     private SpriteRenderer _sr;
     private Animator _animator;
+
+    private bool _shouldJump = false;
 
     void Awake()
     {
@@ -26,40 +25,34 @@ public class Player : MonoBehaviour
         _color = _sr.color;
 
         _groudChecker.OnGroundEnter += OnPlayerGroundEnter;
-        //_groudChecker.OnGroundExit += OnPlayerGroundExit;
     }
 
     private void Update()
     {
-        HandleInput();
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)
+                && _groudChecker.IsGrounded)
+        {
+            _shouldJump = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector2(_velocity.x * Time.fixedDeltaTime, _velocity.y);
+        if (_shouldJump)
+        {
+            _rb.AddForce(Vector2.up * _jumpForce);
+            _groudChecker.IsGrounded = false;
+            _shouldJump = false;
+            OnPlayerGroundExit();
+        }
+
+        Vector2 velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _movementSpeed, _rb.velocity.y);
+        _rb.velocity = new Vector2(velocity.x * Time.fixedDeltaTime, velocity.y);
+        //_rb.velocity = velocity * Time.fixedDeltaTime;
 
         if (_rb.velocity.y < 0)
         {
             _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-
-        // Variable height jump
-        //else if (_rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-        //{
-        //    _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
-        //}
-    }
-
-    protected void HandleInput()
-    {
-        _velocity = new Vector2(0, _rb.velocity.y);
-        _velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _movementSpeed, _rb.velocity.y);
-
-        if (Input.GetKeyDown(KeyCode.Space) && _groudChecker.IsGrounded)
-        {
-            _rb.AddForce(Vector2.up * _jumpForce);
-            _groudChecker.IsGrounded = false;
-            OnPlayerGroundExit();
         }
     }
 
@@ -77,9 +70,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnPlayerGroundExit()
+    {
+        _animator.SetBool("IsGrounded", false);
+    }
+
+    private void OnPlayerGroundEnter()
+    {
+        _animator.SetBool("IsGrounded", true);
+    }
+
     /// <summary>
     /// There is a bug when using OnCollisionEnter when player verz quickly moves to one platform and
-    /// out it dosent change color back. Using OnCollisionStay fix this bug eventhough its more costly.
+    /// out it dosent change color back. Using OnCollisionStay fix this bug eventhough its more costy.
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionStay2D(Collision2D collision)
@@ -108,16 +111,6 @@ public class Player : MonoBehaviour
         //{
         //    parantable.AddChild(transform);
         //}
-    }
-
-    private void OnPlayerGroundExit()
-    {
-        _animator.SetBool("IsGrounded", false);
-    }
-
-    private void OnPlayerGroundEnter()
-    {
-        _animator.SetBool("IsGrounded", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
