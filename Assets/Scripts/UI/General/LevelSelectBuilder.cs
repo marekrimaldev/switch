@@ -47,7 +47,7 @@ public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
             levelDisplay.transform.localScale = new Vector2(_uiElementSize, _uiElementSize);
             levelDisplay.transform.localPosition = pos;
             levelDisplay.DisplayLevel(_levelInfos[i]);
-            _levelDisplays.Add(levelDisplay);
+            //_levelDisplays.Add(levelDisplay);
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UISelector))]
 public class MenuBuilder : MonoBehaviour, IUIBuilder
 {
-    [SerializeField] private ButtonDisplay[] _buttonDisplays;
+    [SerializeField] private UISelectable[] _buttonDisplays;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class MenuBuilder : MonoBehaviour, IUIBuilder
     {
         for (int i = 0; i < _buttonDisplays.Length; i++)
         {
-            _buttonDisplays[i].Highlight(false);
+            _buttonDisplays[i].Hover(false);
         }
     }
 

@@ -15,21 +15,21 @@ public class UISelector : MonoBehaviour
         if (_uiBuilder != null && _startOnFirstSelectable)
             _currSelectable = _uiBuilder.GetFirstUISelectable();
 
-        _currSelectable?.Highlight(true, false);
+        _currSelectable?.Hover(true);
     }
 
     public void SetUIBuilder(IUIBuilder uiBuilder)
     {
         _uiBuilder = uiBuilder;
         _currSelectable = _uiBuilder.GetFirstUISelectable();
-        _currSelectable.Highlight(true, false);
+        _currSelectable.Hover(true);
     }
 
     private void Update()
     {
         if (Input.anyKeyDown)
         {
-            _currSelectable.Highlight(false);
+            _currSelectable.Hover(false);
 
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 _currSelectable = _currSelectable.LeftSuccessor;
@@ -40,7 +40,7 @@ public class UISelector : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 _currSelectable = _currSelectable.DownSuccessor;
 
-            _currSelectable.Highlight(true);
+            _currSelectable.Hover(true);
 
             if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
             {

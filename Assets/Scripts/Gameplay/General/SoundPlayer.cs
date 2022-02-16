@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioClip _sound;
+    [SerializeField] private AudioClip[] _sounds;
     private AudioSource _as;
 
     private void Awake()
@@ -13,9 +13,27 @@ public class SoundPlayer : MonoBehaviour
         _as.playOnAwake = false;
     }
 
-    public void PlaySound()
+    public void PlaySound(int soundIdx)
     {
-        Debug.Log("Playing sound");
-        _as.PlayOneShot(_sound);
+        _as.PlayOneShot(_sounds[soundIdx]);
+    }
+
+    /// <summary>
+    /// This method creates an persistent object with AudioSource attached and play sound on it.
+    /// Use this method if you want your sounds to persist a scene change.
+    /// Object is made persistend by calling DontDestroyOnLoad() 
+    /// </summary>
+    public void PlaySoundPersistent(int soundIdx)
+    {
+        Debug.Log("A");
+
+        GameObject go = new GameObject("Persistent sound player");
+        go.AddComponent<AudioSource>();
+        DontDestroyOnLoad(go);
+        go.GetComponent<AudioSource>().volume = 0.5f;
+        go.GetComponent<AudioSource>().PlayOneShot(_sounds[soundIdx]);
+        Destroy(go, _sounds[soundIdx].length + 1);
+
+        Debug.Log("B");
     }
 }

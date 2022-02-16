@@ -4,95 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LevelDisplay : MonoBehaviour, IUISelectable
+public class LevelDisplay : MonoBehaviour, IUIDisplay
 {
-    [SerializeField] private TMP_Text _levelNumberText;
-    [SerializeField] private Image _levelImage;
-    private LevelInfo _levelInfo;
-
-    [SerializeField] private AudioClip _highlightSound;
-    [SerializeField] private AudioClip _selectSound;
-    [SerializeField] private AudioClip _unavailableSound;
-    private AudioSource _as;
-
     [SerializeField] private StringGameEvent OnLevelSelect;
 
-    public IUISelectable LeftSuccessor { get; set; }
-    public IUISelectable RightSuccessor { get; set; }
-    public IUISelectable UpSuccessor { get; set; }
-    public IUISelectable DownSuccessor { get; set; }
+    [SerializeField] private TMP_Text _text;
+    [SerializeField] private Image _image;
+    private LevelInfo _levelInfo;
 
-    private void Awake()
-    {
-        _as = GetComponent<AudioSource>();
-    }
+    [Header("Colors")]
+    [SerializeField] private Color _textUnselectColor = Color.white;
+    [SerializeField] private Color _textSelectColor = Color.black;
+    [SerializeField] private Color _textUnavailableColor = Color.gray;
+    [SerializeField] private Color _backUnselectColor = Color.black;
+    [SerializeField] private Color _backSelectColor = Color.yellow;
 
     public void DisplayLevel(LevelInfo levelInfo)
     {
         _levelInfo = levelInfo;
-        _levelNumberText.text = levelInfo.LevelName;
-
-        SetUnhighlighted();
+        _text.text = levelInfo.LevelName;
     }
 
-    public void Highlight(bool value, bool playSound = true)
+    public void StartHover()
     {
-        if (value)
-        {
-            if(playSound)
-                _as.PlayOneShot(_highlightSound);
-
-            SetHighlighted();
-        }
-        else
-        {
-            SetUnhighlighted();
-        }
+        throw new System.NotImplementedException();
     }
 
-    public void Select()
+    public void EndHover()
     {
-        if (_levelInfo.IsLocked)
-        {
-            _as.PlayOneShot(_unavailableSound);
-        }
-        else
-        {
-            GameObject go = new GameObject("Persistent sound player");
-            go.AddComponent<AudioSource>();
-            DontDestroyOnLoad(go);
-            go.GetComponent<AudioSource>().PlayOneShot(_selectSound);
-            Destroy(go, 5);
-
-            OnLevelSelect.Raise(_levelInfo.LevelName);
-        }
+        throw new System.NotImplementedException();
     }
 
-    private void SetHighlighted()
+    public void SelectLevel()
     {
-        if (_levelInfo.IsLocked)
-        {
-            _levelImage.color = Color.white;
-            _levelNumberText.color = Color.black;
-        }
-        else
-        {
-            _levelImage.color = Color.yellow;
-            _levelNumberText.color = Color.black;
-        }
-    }
-
-    private void SetUnhighlighted()
-    {
-        if (_levelInfo.IsLocked)
-        {
-            _levelImage.color = Color.black;
-            _levelNumberText.color = Color.white;
-        }
-        else
-        {
-            _levelImage.color = Color.black;
-            _levelNumberText.color = Color.yellow;
-        }
+        OnLevelSelect.Raise(_levelInfo.LevelName);
     }
 }

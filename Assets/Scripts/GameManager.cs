@@ -169,4 +169,9 @@ public class GameManager : MonoBehaviour
     {
         return PlayerPrefs.GetString(ProgressKey) == _creditsSceneName;
     }
+
+    public void QuitGame()
+    {
+        _levelManager.QuitApplication();
+    }
 }

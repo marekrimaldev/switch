@@ -54,7 +54,7 @@ MonoBehaviour:
       - m_Target: {fileID: 985151660483817833}
         m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
         m_MethodName: PlaySound
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -75,7 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb4c2155ab20dd4391e66887ce4f323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sound: {fileID: 8300000, guid: a816053a1dfeb8b4993d536eff4f4983, type: 3}
+  _sounds:
+  - {fileID: 8300000, guid: a816053a1dfeb8b4993d536eff4f4983, type: 3}
 --- !u!114 &2900304290759046863
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -656,7 +656,6 @@ GameObject:
   - component: {fileID: 845789600}
   - component: {fileID: 3624861027175330727}
   - component: {fileID: 959146656396498840}
-  - component: {fileID: 376278205}
   m_Layer: 0
   m_Name: StoryManager
   m_TagString: Untagged
@@ -813,34 +812,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1514133673767847901}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: LoadScene
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &376278205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748582484444601074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9dd10cec17751141b999592950ed84e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 7271b8a71635f604882762a5ffe0a69b, type: 2}
-  UnityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7748582484444601076}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: set_IsStoryModeOn
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
