@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IUIDisplay
 {
-    void StartHover();
-    void EndHover();
+    void StartHover(bool isSelectAvailable);
+    void StopHover(bool isSelectAvailable);
 }

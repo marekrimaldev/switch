@@ -4,62 +4,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(UISelector))]
-public class LevelSelectBuilder : MonoBehaviour, IUIBuilder
+public class LevelSelectBuilder : GridMenuBuilder
 {
-    [SerializeField] private LevelInfo[] _levelInfos;
-    [SerializeField] private LevelDisplay _levelDisplayPrefab;
-    private List<IUISelectable> _levelDisplays = new List<IUISelectable>();
+    //[SerializeField] private LevelSelectable _levelSelectablePrefab;
+    //[SerializeField] private LevelInfo[] _levelInfos;
 
-    [SerializeField] private int _levelsPerRow = 5;
-    [SerializeField] private float _spacing = 50;
-    [SerializeField] private float _uiElementSize = 100;
-
-    private void Start()
+    public override ITraversable[] GetTraverzables()
     {
-        BuildLevelSelect();
-        AssignAdjacency();
-        GetComponent<UISelector>().SetUIBuilder(this);
+        //AssignAdjacency();
+        return _uiTraversables.ToArray();
     }
 
-    public IUISelectable GetFirstUISelectable()
-    {
-        return _levelDisplays[0];
-    }
+    //private void BuildLevelSelect()
+    //{
+    //    Debug.Log(_levelSelectablePrefab.GetComponent<RectTransform>().lossyScale.x);
+    //    ;
+    //    float stepX = (_uiElementSize + _spacing) * _levelSelectablePrefab.GetComponent<RectTransform>().rect.width;
+    //    float stepY = (_uiElementSize + _spacing) * _levelSelectablePrefab.GetComponent<RectTransform>().rect.height;
 
-    private void BuildLevelSelect()
-    {
-        Debug.Log(_levelDisplayPrefab.GetComponent<RectTransform>().lossyScale.x);
-        ;
-        float stepX = (_uiElementSize + _spacing) * _levelDisplayPrefab.GetComponent<RectTransform>().rect.width;
-        float stepY = (_uiElementSize + _spacing) * _levelDisplayPrefab.GetComponent<RectTransform>().rect.height;
+    //    int shouldShift = _levelsPerRow % 2 == 0 ? 1 : 0;   // Shift the start pos if there is even number of levels per row
+    //    Vector2 startPos = Vector2.zero - (_levelsPerRow / 2) * stepX * Vector2.right + shouldShift * stepX * Vector2.right;
 
-        int shouldShift = _levelsPerRow % 2 == 0 ? 1 : 0;   // Shift the start pos if there is even number of levels per row
-        Vector2 startPos = Vector2.zero - (_levelsPerRow / 2) * stepX * Vector2.right + shouldShift * stepX * Vector2.right;
+    //    for (int i = 0; i < _levelInfos.Length; i++)
+    //    {
+    //        int x = i % _levelsPerRow;
+    //        int y = i / _levelsPerRow;
+    //        Vector2 pos = startPos + x * stepX * Vector2.right - y * stepY * Vector2.up;
 
-        for (int i = 0; i < _levelInfos.Length; i++)
-        {
-            int x = i % _levelsPerRow;
-            int y = i / _levelsPerRow;
-            Vector2 pos = startPos + x * stepX * Vector2.right - y * stepY * Vector2.up;
+    //        MenuItem uiSelectable = Instantiate(_menuItemPrefab, Vector2.zero, Quaternion.identity, transform);
+    //        uiSelectable.transform.localScale = new Vector2(_uiElementSize, _uiElementSize);
+    //        uiSelectable.transform.localPosition = pos;
 
-            LevelDisplay levelDisplay = Instantiate(_levelDisplayPrefab, Vector2.zero, Quaternion.identity, transform);
-            levelDisplay.transform.localScale = new Vector2(_uiElementSize, _uiElementSize);
-            levelDisplay.transform.localPosition = pos;
-            levelDisplay.DisplayLevel(_levelInfos[i]);
-            //_levelDisplays.Add(levelDisplay);
-        }
-    }
+    //        LevelSelectable levelSelectable = uiSelectable.gameObject.AddComponent<LevelSelectable>();
+    //        levelSelectable.SetLevelInfo(_levelInfos[i]);
 
-    private void AssignAdjacency()
-    {
-        for (int i = 0; i < _levelDisplays.Count; i++)
-        {
-            int rowOffset = (i / _levelsPerRow) * _levelsPerRow;
-            _levelDisplays[i].LeftSuccessor = _levelDisplays[rowOffset + (i + _levelsPerRow - 1) % _levelsPerRow];
-            _levelDisplays[i].RightSuccessor = _levelDisplays[rowOffset + (i + _levelsPerRow + 1) % _levelsPerRow];
-            _levelDisplays[i].UpSuccessor = _levelDisplays[(i + _levelDisplays.Count - _levelsPerRow) % _levelDisplays.Count];
-            _levelDisplays[i].DownSuccessor = _levelDisplays[(i + _levelDisplays.Count + _levelsPerRow) % _levelDisplays.Count];
-        }
-    }
+    //        TextDisplay textDisplay = uiSelectable.GetComponent<TextDisplay>();
+    //        textDisplay.DisplayText(_levelInfos[i].LevelName);
+
+    //        _uiTraversables.Add(uiSelectable);
+    //    }
+    //}
+
+    //private void AssignAdjacency()
+    //{
+    //    for (int i = 0; i < _uiTraversables.Count; i++)
+    //    {
+    //        int rowOffset = (i / _levelsPerRow) * _levelsPerRow;
+    //        _uiTraversables[i].LeftSuccessor = _uiTraversables[rowOffset + (i + _levelsPerRow - 1) % _levelsPerRow];
+    //        _uiTraversables[i].RightSuccessor = _uiTraversables[rowOffset + (i + _levelsPerRow + 1) % _levelsPerRow];
+    //        _uiTraversables[i].UpSuccessor = _uiTraversables[(i + _uiTraversables.Count - _levelsPerRow) % _uiTraversables.Count];
+    //        _uiTraversables[i].DownSuccessor = _uiTraversables[(i + _uiTraversables.Count + _levelsPerRow) % _uiTraversables.Count];
+    //    }
+    //}
 }

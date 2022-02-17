@@ -10,11 +10,11 @@ public class InGameMenu : MonoBehaviour
 
     [SerializeField] private StringGameEvent OnLoadMainMenuRequest;
 
-    private UISelector _uiSelector;
+    private MenuTraversator _uiSelector;
 
     private void Awake()
     {
-        _uiSelector = GetComponent<UISelector>();
+        _uiSelector = GetComponent<MenuTraversator>();
         SetTimeScale(1);
     }
 

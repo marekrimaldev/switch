@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManagerUIBinder : MonoBehaviour
 {
     [Header("Buttons")]
-    [SerializeField] private UISelectable _levelSelectButtonDisplay;
-    [SerializeField] private UISelectable _loadGameButtonDisplay;
+    [SerializeField] private MenuItem _levelSelectButtonDisplay;
+    [SerializeField] private MenuItem _loadGameButtonDisplay;
 
     private void OnLevelWasLoaded(int level)
     {
