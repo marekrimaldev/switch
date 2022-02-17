@@ -2,59 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameMenu : MonoBehaviour
+public class InGameMenu : Menu
 {
-    [SerializeField] private KeyCode _toggleButton = KeyCode.Escape;
     [SerializeField] private GameObject _inGameMenuCanvas;
     private Canvas[] _otherSceneCanvases;
 
-    [SerializeField] private StringGameEvent OnLoadMainMenuRequest;
-
-    private MenuTraversator _uiSelector;
-
     private void Awake()
     {
-        _uiSelector = GetComponent<MenuTraversator>();
-        SetTimeScale(1);
+        _otherSceneCanvases = FindObjectsOfType<Canvas>();
     }
 
-    private void Start()
-    {
-        _inGameMenuCanvas.SetActive(false);
-        _uiSelector.enabled = false;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(_toggleButton))
-        {
-            ToggleMenu();
-        }
-    }
-
-    public void ToggleMenu()
-    {
-        _inGameMenuCanvas.SetActive(!_inGameMenuCanvas.activeSelf);
-        _uiSelector.enabled = !_uiSelector.enabled;
-
-        EnableSceneCanvases(!_inGameMenuCanvas.activeSelf);
-
-        if (_inGameMenuCanvas.activeSelf)
-            SetTimeScale(0);
-        else
-            SetTimeScale(1);
-    }
-
-    private void SetTimeScale(float timeScale)
-    {
-        Time.timeScale = timeScale;
-    }
-
-    private void EnableSceneCanvases(bool enable)
+    public void EnableSceneCanvases(bool enable)
     {
         if (!enable)
         {
-            _otherSceneCanvases = FindObjectsOfType<Canvas>();
             for (int i = 0; i < _otherSceneCanvases.Length; i++)
             {
                 if (_otherSceneCanvases[i].gameObject == _inGameMenuCanvas)
@@ -73,10 +34,5 @@ public class InGameMenu : MonoBehaviour
                 _otherSceneCanvases[i].gameObject.SetActive(true);
             }
         }
-    }
-
-    public void LoadMainMenu()
-    {
-        OnLoadMainMenuRequest.Raise("MainMenu");
     }
 }

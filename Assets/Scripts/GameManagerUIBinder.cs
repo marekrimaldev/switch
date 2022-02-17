@@ -8,8 +8,11 @@ public class GameManagerUIBinder : MonoBehaviour
     [SerializeField] private MenuItem _levelSelectButtonDisplay;
     [SerializeField] private MenuItem _loadGameButtonDisplay;
 
-    private void OnLevelWasLoaded(int level)
+    private void OnEnable()
     {
+        if (_levelSelectButtonDisplay == null)
+            return;
+
         if (GameManager.Instance.IsStoryCompleted())
             _levelSelectButtonDisplay.SetAvailable(true);
         else
@@ -19,6 +22,11 @@ public class GameManagerUIBinder : MonoBehaviour
             _loadGameButtonDisplay.SetAvailable(true);
         else
             _loadGameButtonDisplay.SetAvailable(false);
+    }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.RestartLevel();
     }
 
     public void StartNewStory()

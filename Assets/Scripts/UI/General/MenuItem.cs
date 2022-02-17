@@ -35,12 +35,18 @@ public class MenuItem : MonoBehaviour, ITraversable
 
     public void OnHoverStop()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         OnHoverExit?.Invoke();
         SetDisplaysHoverStop();
     }
 
     public void Select()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         if (_isSelectAvailable)
         {
             OnSelect?.Invoke();

@@ -15,6 +15,9 @@ public class SoundPlayer : MonoBehaviour
 
     public void PlaySound(int soundIdx)
     {
+        if(_as == null)
+            _as = gameObject.AddComponent<AudioSource>();
+
         _as.PlayOneShot(_sounds[soundIdx]);
     }
 
@@ -25,15 +28,11 @@ public class SoundPlayer : MonoBehaviour
     /// </summary>
     public void PlaySoundPersistent(int soundIdx)
     {
-        Debug.Log("A");
-
         GameObject go = new GameObject("Persistent sound player");
         go.AddComponent<AudioSource>();
         DontDestroyOnLoad(go);
         go.GetComponent<AudioSource>().volume = 0.5f;
         go.GetComponent<AudioSource>().PlayOneShot(_sounds[soundIdx]);
         Destroy(go, _sounds[soundIdx].length + 1);
-
-        Debug.Log("B");
     }
 }

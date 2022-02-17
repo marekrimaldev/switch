@@ -311,6 +311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7178127144998667959, guid: 79c3146a97d88f44cad6044e433e7e4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c3146a97d88f44cad6044e433e7e4f, type: 3}
 --- !u!1 &1253768808
@@ -666,6 +670,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gem
       objectReference: {fileID: 0}
+    - target: {fileID: 3041207806925024828, guid: e2f9976f6b2a26a409a2d09d4bd42532, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f9976f6b2a26a409a2d09d4bd42532, type: 3}
 --- !u!1001 &4681730450602004790
@@ -722,6 +730,10 @@ PrefabInstance:
     - target: {fileID: 4681730451387313197, guid: a6185706792e81a41b06cfc057701973, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681730451387313197, guid: a6185706792e81a41b06cfc057701973, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6185706792e81a41b06cfc057701973, type: 3}

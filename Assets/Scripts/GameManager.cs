@@ -103,16 +103,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadProgress()
     {
-        if (PlayerPrefs.HasKey(ProgressKey))
+        if (CanLoadProgress())
         {
             Restarts = PlayerPrefs.GetInt(RestartKey);
+            _storyUI.UpdateRestarts(Restarts);
 
             string sceneToLoadName = PlayerPrefs.GetString(ProgressKey);
             Debug.Log("Scene name " + sceneToLoadName);
             _levelManager.LoadScene(sceneToLoadName);
         }
-
-        _storyUI.UpdateRestarts(Restarts);
     }
 
     public void ResetProgress()

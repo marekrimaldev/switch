@@ -10,7 +10,8 @@ public class ImageDisplay : UIDisplay
     [Header("Colors")]
     [SerializeField] private Color _selectColor = Color.yellow;
     [SerializeField] private Color _unselectColor = Color.black;
-    [SerializeField] private Color _unavailableColor = Color.black;
+    [SerializeField] private Color _unavailableSelectColor = Color.black;
+    [SerializeField] private Color _unavailableUnselectColor = Color.black;
 
     public void DisplayImage(Sprite sprite)
     {
@@ -22,7 +23,7 @@ public class ImageDisplay : UIDisplay
         if (isSelectAvailable)
             _imageObject.color = _selectColor;
         else
-            _imageObject.color = _unavailableColor;
+            _imageObject.color = _unavailableSelectColor;
     }
 
     public override void StopHover(bool isSelectAvailable)
@@ -30,6 +31,6 @@ public class ImageDisplay : UIDisplay
         if (isSelectAvailable)
             _imageObject.color = _unselectColor;
         else
-            _imageObject.color = _unavailableColor;
+            _imageObject.color = _unavailableUnselectColor;
     }
 }

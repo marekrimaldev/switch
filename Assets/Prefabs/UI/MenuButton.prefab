@@ -138,9 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7024abde1dde44fb550e31e1a60c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: 
   _textObject: {fileID: 6009901420929842496}
-  _replaceOriginalText: 0
   _selectColor: {r: 0, g: 0, b: 0, a: 1}
   _unselectColor: {r: 1, g: 1, b: 1, a: 1}
   _unavailableColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -156,11 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405faa3c0efb15048b61524c7573bb8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
   _imageObject: {fileID: 6510871027158658432}
   _selectColor: {r: 1, g: 0.8627451, b: 0, a: 1}
   _unselectColor: {r: 0, g: 0, b: 0, a: 1}
-  _unavailableColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+  _unavailableSelectColor: {r: 1, g: 0.8627451, b: 0, a: 1}
+  _unavailableUnselectColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &8620377635217653333
 MonoBehaviour:
   m_ObjectHideFlags: 0

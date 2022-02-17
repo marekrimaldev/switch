@@ -11,7 +11,7 @@ public class EventOnKeyPress : EventOnKeyPressBase
     protected override void InvokeEvent()
     {
         Void v;
-        OnKeyPress.Raise(v);
+        OnKeyPress?.Raise(v);
         OnKeyPressUE?.Invoke();
     }
 }
