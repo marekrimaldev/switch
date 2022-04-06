@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// MenuSelector implements ITraversator interface and can traverse Menu
+/// </summary>
 public class MenuSelector : MonoBehaviour, ITraversator
 {
     [SerializeField] private bool _startOnFirstSelectable = false;

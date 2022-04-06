@@ -9,14 +9,13 @@ public class Translator : MonoBehaviour
     [SerializeField] private Transform[] _pathPoints;
     private int _nextPointIdx = 0;
 
-    private Rigidbody2D _rb;
-
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-
         if(_pathPoints.Length != 0)
+        {
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             StartCoroutine(Move());
+        }
     }
 
     private IEnumerator Move()
@@ -27,7 +26,6 @@ public class Translator : MonoBehaviour
             Vector3 dir = vec.normalized;
             while (vec.magnitude > 0.1)
             {
-                //transform.position += dir * _speed * Time.deltaTime;
                 transform.Translate(dir * _speed * Time.deltaTime, Space.World);
                 vec = _pathPoints[_nextPointIdx].position - transform.position;
 

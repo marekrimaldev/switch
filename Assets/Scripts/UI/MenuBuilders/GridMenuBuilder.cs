@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Connects provided MenuItems as a grid
+/// </summary>
 public class GridMenuBuilder : MenuBuilder
 {
     [SerializeField] private int _elementsPerRow = 5;

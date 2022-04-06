@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class handles game progress
+/// </summary>
 [RequireComponent(typeof(LevelManager))]
 public class GameManager : MonoBehaviour
 {
@@ -88,15 +91,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Saving progress in scene " + _levelManager.GetCurrSceneName());
 
         PlayerPrefs.SetInt(RestartKey, Restarts);
-
-        string currSceneName = _levelManager.GetCurrSceneName();
-        PlayerPrefs.SetString(ProgressKey, currSceneName);
+        PlayerPrefs.SetString(ProgressKey, _levelManager.GetCurrSceneName());
     }
 
     public bool CanLoadProgress()
     {
         if (PlayerPrefs.HasKey(ProgressKey))
             Debug.Log("Saved scene = " + PlayerPrefs.GetString(ProgressKey));
+
+        Debug.Log("Load = " + PlayerPrefs.HasKey(ProgressKey));
 
         return PlayerPrefs.HasKey(ProgressKey);
     }

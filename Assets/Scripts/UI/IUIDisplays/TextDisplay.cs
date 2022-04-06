@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Changes text properties when hovered over
+/// </summary>
 public class TextDisplay : UIDisplay
 {
     [SerializeField] private TMP_Text _textObject;

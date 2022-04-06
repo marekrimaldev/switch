@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Binds UI with GameManager
+/// </summary>
 public class GameManagerUIBinder : MonoBehaviour
 {
     [Header("Buttons")]
     [SerializeField] private MenuItem _levelSelectButtonDisplay;
     [SerializeField] private MenuItem _loadGameButtonDisplay;
 
-    private void OnEnable()
+    void Awake()
     {
+        SceneManager.sceneLoaded += SetupMainMenuButtons;
+    }
+
+    private void SetupMainMenuButtons(Scene scene, LoadSceneMode mode)
+    {
+        // This is only valid if buttons are assigned
         if (_levelSelectButtonDisplay == null)
             return;
 

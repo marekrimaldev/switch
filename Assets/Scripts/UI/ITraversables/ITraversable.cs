@@ -6,6 +6,7 @@ using UnityEngine;
 /// Classes implementing this interface can be traversed
 /// Each ITraverzable defines its 4 successors in 4 directions LEFT, RIGHT, UP, DOWN
 /// When traverzing ITraverzable OnHoverStart() and OnHoverStop() methods are called
+/// Each ITraversable is also ISelectable so it can be selected
 /// </summary>
 public interface ITraversable : ISelectable
 {

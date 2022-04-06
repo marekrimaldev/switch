@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] protected float _movementSpeed = 20;
-    [SerializeField] protected float _jumpForce = 20;
-    [SerializeField] protected float _fallMultiplier = 2f;
+    [SerializeField] private float _movementSpeed = 20;
+    [SerializeField] private float _jumpForce = 20;
+    [SerializeField] private float _fallMultiplier = 2f;
 
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -36,9 +36,7 @@ public class PlayerController : MonoBehaviour
             _shouldJump = false;
         }
 
-        Vector2 velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _movementSpeed, _rb.velocity.y);
-        _rb.velocity = new Vector2(velocity.x * Time.fixedDeltaTime, velocity.y);
-
+        _rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * _movementSpeed * Time.fixedDeltaTime, _rb.velocity.y);
         if (_rb.velocity.y < 0)
         {
             _rb.velocity += Vector2.up * Physics2D.gravity * (_fallMultiplier - 1) * Time.fixedDeltaTime;
@@ -72,7 +70,16 @@ public class PlayerController : MonoBehaviour
         IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
         if (interactable != null)
         {
-            interactable.Interact(this);
+            interactable.StartInteract(this);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        IInteractable interactable = collision.gameObject.GetComponentInParent<IInteractable>();
+        if (interactable != null)
+        {
+            interactable.StopInteract(this);
         }
     }
 }

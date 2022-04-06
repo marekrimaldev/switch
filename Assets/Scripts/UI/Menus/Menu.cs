@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This class is a set of connected ITraverzables
 /// Use IMenuBuilder to get ITraverzables 
-/// Each menu has its own IMenuTraverzator which can traverse the menu
+/// Each menu has its own MenuTraversator : ITraversator which can traverse the menu
 /// </summary>
 [RequireComponent(typeof(ITraversator))]
 public class Menu : MonoBehaviour

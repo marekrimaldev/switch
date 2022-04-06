@@ -15,8 +15,10 @@ public class Platform : MonoBehaviour, IInteractable
         _sr = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Interact(PlayerController player)
+    public void StartInteract(PlayerController player)
     {
+        player.transform.SetParent(transform);
+
         SpriteRenderer sr = player.GetComponentInChildren<SpriteRenderer>();
         if (sr != null)
         {
@@ -27,5 +29,10 @@ public class Platform : MonoBehaviour, IInteractable
                 OnColorSwitchUE?.Invoke();
             }
         }
+    }
+
+    public void StopInteract(PlayerController player)
+    {
+        player.transform.SetParent(null);
     }
 }

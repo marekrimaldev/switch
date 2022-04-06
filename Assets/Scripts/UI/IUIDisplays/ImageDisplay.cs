@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Changes image properties when hovered over
+/// </summary>
 public class ImageDisplay : UIDisplay
 {
     [SerializeField] private Image _imageObject;
